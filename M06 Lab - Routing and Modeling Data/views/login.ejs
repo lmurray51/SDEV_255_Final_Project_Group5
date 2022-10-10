@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/style.css" />
+        <title>M05 Lab - Final Project Design, Links, and Backend</title>
+    </head>
+
+    <body class="bg-dark">
+    <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+
+            <div class="container">
+
+                <a href="#" class="navbar-brand">Login Page</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"> 
+                    <span class="navbar-toggler-icon"> </span> 
+                </button>
+
+                <div class="collapse navbar-collapse" id="navmenu">
+                  <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                          <a href="/signup" class="nav-link">Sign Up</a>
+                      </li>
+                  </ul>
+              </div>
+            </div>
+        </nav>
+
+    <!-- Showcase -->
+        <section class="bg-secondary text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+            <div class="container">
+                <div class="d-sm-flex align-items-center justify-content-between">
+                    <div>
+                        <form action="/signup">
+                          <span class="text-warning"><h2>Login</h2></span> 
+
+                          <label for="userName">Username:</label>
+                          <input type="text" class="form-control" name="userName" placeholder="username" required>
+                          <div class="userName error"></div>
+                          
+                          <label for="password">Password:</label>
+                          <input type="password" class="form-control" name="password" placeholder="password" required>
+                          <div class="password error"></div>
+
+                          <button>Log In</button>
+                        </form>
+
+                        <script>
+                          const form = document.querySelector('form');
+                          const userNameError = document.querySelector('.userName.error');
+                          const passwordError = document.querySelector('.password.error');
+                        
+                          form.addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                        
+                            // reset errors
+                            userNameError.textContent = '';
+                            passwordError.textContent = '';
+                        
+                            // get values
+                            const userName = form.userName.value;
+                            const password = form.password.value;
+                        
+                            try {
+                              const res = await fetch('/login', { 
+                                method: 'POST', 
+                                body: JSON.stringify({ userName, password }),
+                                headers: {'Content-Type': 'application/json'}
+                              });
+                              const data = await res.json();
+                              console.log(data);
+                              if (data.errors) {
+                                userNameError.textContent = data.errors.userName;
+                                passwordError.textContent = data.errors.password;
+                              }
+                              if (data.user) {
+                                location.assign('/index');
+                              }
+                        
+                            }
+                            catch (err) {
+                              console.log(err);
+                            }
+                          });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+        <footer class="p-5 bg-dark text-white text-center position-relative">
+            <div class="container">
+                <p class="lead">2022 SDEV-255 Group 5</p>
+
+                <a href="#" class="position-absolute bottom-0 end-0 p-5">
+                    <i class="bi bi-arrow-up-circle-fill h1" style="color: #fc8c03"></i>
+                </a>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+        
+    </body>
+</html>
