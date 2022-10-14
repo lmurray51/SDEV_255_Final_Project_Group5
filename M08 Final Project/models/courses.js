@@ -14,6 +14,18 @@ const courseSchema = new Schema({
     type: String,
     required: true
   },
+  subjectArea: {
+    type: String,
+    required: true
+  },
+  creditNum: {
+    type: Number,
+    required: true
+  },
+  courseUsers: {
+    type: Array,
+    required: true
+  },
 });
 
 const Course = mongoose.model('Course', courseSchema);

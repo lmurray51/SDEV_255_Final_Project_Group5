@@ -27,7 +27,10 @@
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="/" class="nav-link">View Courses</a>
+                        <a href="/index" class="nav-link">View Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -48,6 +51,8 @@
                                             <th scope="col">Number</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Description</th>
+                                            <th scope="col">Subject Area</th>
+                                            <th scope="col">Credit Num</th>
                                             <th scope="col">Delete</th>
                                         </tr>
                                   </thead> 
@@ -58,6 +63,8 @@
                                                     <th scope="row"><h2 class="courseNum"><%= course.courseNum%></h2></th>
                                                     <td><h3 class="courseName"><%= course.courseName%></h3></td>
                                                     <td><h2 class="courseDesc" style="font-size: 15px"><%= course.courseDesc%></h2></td>
+                                                    <td><h2 class="subjectArea" style="font-size: 15px"><%= course.subjectArea%></h2></td>
+                                                    <td><h2 class="creditNum" style="font-size: 15px"><%= course.creditNum%></h2></td>
                                                     <td><a href="/details/<%= course._id%>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Delete Course</a></td>
                                                 </tr>
                                             <% }) %>
